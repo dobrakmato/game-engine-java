@@ -1,0 +1,70 @@
+#version 410 core
+
+layout(vertices = 3) out;
+
+in _TOCS {
+     vec2 texCoord;
+     vec2 dispTexCoord;
+     vec3 normal;
+     vec3 worldPos;
+} TOCS[];
+
+//layout (location = 0) in vec2 VtexCoord[];
+//layout (location = 1) in vec3 Vnormal[];
+//layout (location = 2) in vec3 VworldPos[];
+
+out _TOES {
+     vec2 texCoord;
+     vec2 dispTexCoord;
+     vec3 normal;
+     vec3 worldPos;
+
+} TOES[];
+
+//layout (location = 0) out vec2 TCtexCoord[];
+//layout (location = 1) out vec3 TCnormal[];
+//layout (location = 2) out vec3 TCworldPos[];
+
+uniform vec3 cameraPos;
+
+float GetTessLevel(float Distance0, float Distance1)
+{
+    float AvgDistance = (Distance0 + Distance1) / 2.0;
+
+    if (AvgDistance <= 100.0) {
+        return 10.0;
+    }
+    else if (AvgDistance <= 200.0) {
+        return 7.0;
+    }
+    else if (AvgDistance <= 400.0) {
+        return 5.0;
+    }
+    else if (AvgDistance <= 650.0) {
+        return 3.0;
+    }
+    else if (AvgDistance <= 1000.0) {
+        return 1.0;
+    }
+    else {
+        return 0.1;
+    }
+}
+
+void main() {
+    TOES[gl_InvocationID].texCoord = TOCS[gl_InvocationID].texCoord;
+    TOES[gl_InvocationID].dispTexCoord = TOCS[gl_InvocationID].dispTexCoord;
+    TOES[gl_InvocationID].normal = TOCS[gl_InvocationID].normal;
+    TOES[gl_InvocationID].worldPos = TOCS[gl_InvocationID].worldPos;
+
+    // Calculate the distance from the camera to the three control points
+    float EyeToVertexDistance0 = distance(cameraPos.xz, TOES[0].worldPos.xz);
+    float EyeToVertexDistance1 = distance(cameraPos.xz, TOES[1].worldPos.xz);
+    float EyeToVertexDistance2 = distance(cameraPos.xz, TOES[2].worldPos.xz);
+
+    // Calculate the tessellation levels
+    gl_TessLevelOuter[0] = GetTessLevel(EyeToVertexDistance1, EyeToVertexDistance2);
+    gl_TessLevelOuter[1] = GetTessLevel(EyeToVertexDistance2, EyeToVertexDistance0);
+    gl_TessLevelOuter[2] = GetTessLevel(EyeToVertexDistance0, EyeToVertexDistance1);
+    gl_TessLevelInner[0] = gl_TessLevelOuter[2];
+}

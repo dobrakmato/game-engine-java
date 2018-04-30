@@ -1,0 +1,52 @@
+#version 410 core
+
+in _TOES {
+     vec2 texCoord;
+     vec2 dispTexCoord;
+     vec3 normal;
+     vec3 worldPos;
+} TOES[];
+
+out _TOFS {
+     vec2 texCoord;
+     vec3 normal;
+     vec3 worldPos;
+} TOFS;
+
+layout(triangles, fractional_even_spacing, ccw) in;
+
+uniform sampler2D displacementMap; // 5
+uniform sampler2D normalMap; // 6 (not 1 because 1 is used for diffuse/normal/spec lighting)
+uniform float dispFactor;
+
+uniform mat4 view;
+uniform mat4 projection;
+
+vec2 interpolate2D(vec2 v0, vec2 v1, vec2 v2) {
+   	return vec2(gl_TessCoord.x) * v0 + vec2(gl_TessCoord.y) * v1 + vec2(gl_TessCoord.z) * v2;
+}
+
+vec3 interpolate3D(vec3 v0, vec3 v1, vec3 v2) {
+   	return vec3(gl_TessCoord.x) * v0 + vec3(gl_TessCoord.y) * v1 + vec3(gl_TessCoord.z) * v2;
+}
+
+void main() {
+    TOFS.texCoord = interpolate2D(TOES[0].texCoord, TOES[1].texCoord, TOES[2].texCoord);
+    TOFS.normal = interpolate3D(TOES[0].normal, TOES[1].normal, TOES[2].normal);
+    TOFS.normal = normalize(TOFS.normal);
+    TOFS.worldPos = interpolate3D(TOES[0].worldPos, TOES[1].worldPos, TOES[2].worldPos);
+
+    // Displacement.
+    vec2 dispTexCoordInterpolated = interpolate2D(TOES[0].dispTexCoord, TOES[1].dispTexCoord, TOES[2].dispTexCoord);
+    float disp = texture(displacementMap, dispTexCoordInterpolated).r;
+    TOFS.worldPos += vec3(0, 1, 0) * disp * dispFactor;
+
+    // Calculate new normal.
+    //TOFS.normal =  texture(normalMap, dispTexCoordInterpolated).xyz;
+    vec3 x = TOFS.worldPos;
+    vec3 t0 = x + TOFS.normal * texture(displacementMap, dispTexCoordInterpolated + vec2(0.005, 0)).r * dispFactor;
+    vec3 t1 = x + TOFS.normal * texture(displacementMap, dispTexCoordInterpolated + vec2(0, 0.005)).r * dispFactor;
+    //TOFS.normal = normalize(cross(t0, t1));
+
+    gl_Position = projection * view * vec4(TOFS.worldPos, 1.0);
+}
