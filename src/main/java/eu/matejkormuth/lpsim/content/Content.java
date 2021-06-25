@@ -181,10 +181,11 @@ public final class Content {
      */
     static {
         content = new Content();
-        content.addRoot(Paths.get(".")); // default one
         content.addRoot(Paths.get("C:\\Users\\Matej\\IdeaProjects\\lpsim\\src\\main\\resources/"));
-        content.addRoot(Paths.get("C:\\Users\\Matej\\IdeaProjects\\lpsim\\development\\Development Resources\\PBR Materials/")); // pbr materials
-        content.addRoot(Paths.get("C:\\Users\\Matej\\IdeaProjects\\lpsim\\development\\Development Resources\\__IN_WORK")); // pbr materials (2)
+        content.addRoot(Paths.get(".")); // default one
+        content.addRoot(Paths.get("D:\\Users\\Matej\\IdeaProjects\\lpsim\\src\\main\\resources/"));
+        content.addRoot(Paths.get("D:\\Users\\Matej\\IdeaProjects\\lpsim\\development\\Development Resources\\PBR Materials/")); // pbr materials
+        content.addRoot(Paths.get("D:\\Users\\Matej\\IdeaProjects\\lpsim\\development\\Development Resources\\__IN_WORK")); // pbr materials (2)
     }
 
     public static Content getContent() {

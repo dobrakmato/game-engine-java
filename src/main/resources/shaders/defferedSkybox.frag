@@ -20,6 +20,8 @@ uniform sampler2D c1;      // color_attachment_1 texture 1
 uniform sampler2D c2;      // color_attachment_2 texture 2
 //uniform sampler2D c3;      // color_attachment_3 texture 3
 
+uniform sampler2D ssao;      //  texture 12
+
 uniform sampler2D depth;
 
 uniform mat4 model;      // identity
@@ -99,6 +101,7 @@ void main() {
     vec4 v0 = texture(c0, texCoord0).rgba;
     vec3 v1 = texture(c1, texCoord0).xyz;
     vec3 v2 = texture(c2, texCoord0).rgb;
+    float ssaoOcclusion = texture(ssao, texCoord0).r;
 
     // Resolve shader params.
     vec3 albedo = v0.rgb;

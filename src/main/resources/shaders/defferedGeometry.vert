@@ -15,7 +15,7 @@ a cross-product in your vertex program.
 
 // Oputput.
 out vec2 texCoord0;
-//out vec3 normal0;
+out vec3 normal0;
 out vec3 tangent0;
 out vec3 worldPos0;
 
@@ -37,7 +37,7 @@ void main() {
     vec4 worldSpacePosition = model * vec4(position, 1);
     gl_Position = projection * view * worldSpacePosition;
 
-    vec3 normal0 = normalize((model * vec4(normal, 0)).xyz);
+    normal0 = normalize((model * vec4(normal, 0)).xyz);
     vec3 tangent0 = normalize((model * vec4(tangent,  0)).xyz);
     vec3 bitangent0 = normalize((model * vec4(cross(normal, tangent), 0)).xyz);
 

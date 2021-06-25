@@ -1,18 +1,18 @@
 /**
- * lpsim -
+ * lpsim - 
  * Copyright (c) 2015, Matej Kormuth <http://www.github.com/dobrakmato>
  * All rights reserved.
- * <p>
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
- * <p>
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  * list of conditions and the following disclaimer.
- * <p>
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  * this list of conditions and the following disclaimer in the documentation and/or
  * other materials provided with the distribution.
- * <p>
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -141,6 +141,15 @@ public class World {
         spotLight4.setDirection(new Vector3f(-0.45636812f, -0.17785656f, -0.87183446f).normalize());
         //spotLight4.setCastingShadows(true);
 
+        //SpotLight spotLight5 = new SpotLight();
+        //spotLight5.setCutoff(0.66f);
+        //spotLight.setIntensity(5f);
+        //spotLight5.setAttenuation(new Attenuation(1.0f, 0.0f, 0.017f));
+        //spotLight5.setColor(new Vector3f(1, 0.8f, 1));
+        //spotLight5.setPosition(new Vector3f(-109.88745f, 24.19849f, 52.544212f));
+        //spotLight5.setDirection(new Vector3f(-0.7748748f, -0.14685932f, 0.6148183f).normalize());
+        //spotLight5.setCastingShadows(true);
+
         testLight = new PointLight();
         testLight.setAttenuation(new Attenuation(1.0f, 0.0f, 0.017f));
         testLight.setColor(new Vector3f(0, 1, 0));
@@ -159,12 +168,13 @@ public class World {
             lights.add(pl);
         }
 
-        // lights.add(sun);
+        lights.add(sun);
         lights.add(spotLight);
         lights.add(testLight);
         //lights.add(spotLight2);
         //lights.add(spotLight3);
         //lights.add(spotLight4);
+        //lights.add(spotLight5);
         //lights.add(sun2);
 
         this.sky = new PreethamSky(new Mesh(BGF.load("shpere10_20"), InterleavedVertexLayout.POSITION_ONLY), camera, sun);
@@ -271,7 +281,7 @@ public class World {
         PBRMaterial paintPeeling = PBRMaterial.fromJSON("Paint Peeling");
         PBRMaterial bark1 = PBRMaterial.fromJSON("Bark1 Unreal Engine");
         PBRMaterial brickCinder = PBRMaterial.fromJSON("OldPlaster 01");
-        PBRMaterial ines = PBRMaterial.fromJSON("Ines");
+        PBRMaterial aaa = PBRMaterial.fromJSON("Ines");
         PBRMaterial rock_sandstoneMaterial = PBRMaterial.fromJSON("textures/rock_sandstone");
         PBRMaterial logmat = PBRMaterial.fromJSON("textures/logs");
         PBRMaterial gunmat = PBRMaterial.fromJSON("textures/Cerberus_LP");
@@ -314,7 +324,7 @@ public class World {
         Mesh wolf = new Mesh(BGF.load("wolf-obj"), InterleavedVertexLayout.STANDARD);
         Mesh bambus = new Mesh(BGF.load("bambus2"), InterleavedVertexLayout.STANDARD);
         //Mesh terrain = new Mesh(BGF.load("terrain_blender"), VertexLayout.STANDARD);
-        Mesh rock_sandstone = new Mesh(BGF.load("rock_sandstone"), InterleavedVertexLayout.STANDARD);
+        //Mesh rock_sandstone = new Mesh(BGF.load("rock_sandstone"), InterleavedVertexLayout.STANDARD);
         Mesh logs = new Mesh(BGF.load("woods"), InterleavedVertexLayout.STANDARD);
         Mesh Cerberus_LP = new Mesh(BGF.load("Cerberus_LP"), InterleavedVertexLayout.STANDARD);
         long geometryEnd = System.nanoTime();
@@ -408,8 +418,8 @@ public class World {
         //testMaterial("Wall 4");
         //testMaterial("Wall 5");
 
-        Model cube_mod44 = new Model(barrel, ines);
-        cube_mod44.setPosition(new Vector3f(-50, 10, 98.678478f));
+        Model cube_mod44 = new Model(barrel, aaa);
+        cube_mod44.setPosition(new Vector3f(-125, 1, 64));
         cube_mod44.setScale(new Vector3f(4, 4, 4));
         cube_mod44.addComponent(new Rotation(new Vector3f(0, 1f, 0), 0.001f));
 
@@ -421,9 +431,9 @@ public class World {
         sphere_mod.setPosition(new Vector3f(0, 50, 0));
         sphere_mod.setScale(new Vector3f(3, 3, 3));
 
-        Model rocksandstone_mod = new Model(rock_sandstone, rock_sandstoneMaterial);
-        rocksandstone_mod.setPosition(new Vector3f(-40, 0, -10));
-        rocksandstone_mod.setScale(new Vector3f(.3f, .3f, .3f));
+        //Model rocksandstone_mod = new Model(rock_sandstone, rock_sandstoneMaterial);
+        //rocksandstone_mod.setPosition(new Vector3f(-40, 0, -10));
+        //rocksandstone_mod.setScale(new Vector3f(.3f, .3f, .3f));
 
         Model logs_mod = new Model(logs, logmat);
         logs_mod.setPosition(new Vector3f(-60, 0, -10));
@@ -479,10 +489,10 @@ public class World {
         probecubetest.setScale(new Vector3f(3, 3, 3));
         probecubetest.setPosition(new Vector3f(-20, 20, 20));
 
-        Model sexShopSign = new Model(new Mesh(BGF.load("sex_shop"), InterleavedVertexLayout.STANDARD), PBRMaterial.fromJSON("textures/neon"));
-        sexShopSign.setPosition(new Vector3f(-165, 22, 73));
-        sexShopSign.setScale(new Vector3f(1, 1, 1));
-        sexShopSign.setRotation(new Vector3f((float) Math.toRadians(90), 0, 0));
+        // Model sexShopSign = new Model(new Mesh(BGF.load("sex_shop"), InterleavedVertexLayout.STANDARD), PBRMaterial.fromJSON("textures/neon"));
+        // sexShopSign.setPosition(new Vector3f(-165, 22, 73));
+        // sexShopSign.setScale(new Vector3f(1, 1, 1));
+        // sexShopSign.setRotation(new Vector3f((float) Math.toRadians(90), 0, 0));
 
         Mesh fanStill = new Mesh(BGF.load("fan_still"), InterleavedVertexLayout.STANDARD);
         Mesh fanBlades = new Mesh(BGF.load("fan_blades"), InterleavedVertexLayout.STANDARD);
@@ -518,7 +528,7 @@ public class World {
         objects.add(sphere_mod);
         objects.add(floor_mod);
         objects.add(wall);
-        objects.add(rocksandstone_mod);
+        //objects.add(rocksandstone_mod);
         objects.add(probecubetest);
         objects.add(logs_mod);
         objects.add(gun_mod);
@@ -813,6 +823,7 @@ public class World {
     private final FrameBuffer MAIN_LDR_FB = new FrameBuffer();
 
     private final Bloom bloom = new Bloom(6, quadMesh); // 3 blurs
+    private final SSAO ssao = new SSAO(CANVAS_WIDTH, CANVAS_HEIGHT);
     //private final Bloom2 bloom2 = new Bloom2(quadMesh);
 
     {
@@ -931,6 +942,10 @@ public class World {
 
         static GLProfiler decals = render.createChild("Decals");
         static GLProfiler copyDepth = render.createChild("Copy Depth");
+
+        static GLProfiler ssao = render.createChild("SSAO");
+        static GLProfiler ssaoGenerate = ssao.createChild("Generate");
+        static GLProfiler ssaoBlur = ssao.createChild("Blur");
 
 
         static GLProfiler lightPass = render.createChild("Light Pass");
@@ -1193,6 +1208,34 @@ public class World {
         //P.copyDepth.end();
         // endregion
 
+        // Init GBuffer textures as samplers in shaders.
+        Texture2D.activeSampler(0);
+        gBuffer.colorAttachments[0].bind();
+        Texture2D.activeSampler(1);
+        gBuffer.colorAttachments[1].bind();
+        Texture2D.activeSampler(2);
+        gBuffer.colorAttachments[2].bind();
+        Texture2D.activeSampler(9);
+        gBuffer.depthAttachment.bind();
+
+        // region SSAO
+        P.ssao.start();
+
+        P.ssaoGenerate.start();
+        Texture2D.activeSampler(11);
+        ssao.getNoiseTexture().bind();
+        gBuffer.bindForReading();
+        ssao.passSSAO(projection, view);
+        quadMesh.drawElements();
+        P.ssaoGenerate.end();
+
+        P.ssaoBlur.start();
+        ssao.passBlur();
+        P.ssaoBlur.end();
+
+        P.ssao.end();
+        // endregion
+
         glDrawBuffers(DRAW_BUFFERS);
 
         // region Light pass
@@ -1208,22 +1251,16 @@ public class World {
         //glBlitFramebuffer(0, 0, Display.getWidth(), Display.getHeight(), 0, 0, Display.getWidth(), Display.getHeight(), GL_DEPTH_BUFFER_BIT, GL_NEAREST);
         //Util.checkGLError();
 
+        ssao.getSsaoBuffer().bindForReading();
+        Texture2D.activeSampler(12);
+        ssao.getSsaoTexture().bind();
 
-        skyPass.use().setUniform("view", view).setUniform("projection", projection);
+        skyPass.use().setUniform("view", view).setUniform("projection", projection).setUniform("ssao", 12);
         glClear(GL_COLOR_BUFFER_BIT);
         //glEnable(GL_BLEND);
         //glBlendEquation(GL_FUNC_ADD);
         //glBlendFunc(GL_ONE, GL_ONE);
 
-        // Init GBuffer textures as samplers in shaders.
-        Texture2D.activeSampler(0);
-        gBuffer.colorAttachments[0].bind();
-        Texture2D.activeSampler(1);
-        gBuffer.colorAttachments[1].bind();
-        Texture2D.activeSampler(2);
-        gBuffer.colorAttachments[2].bind();
-        Texture2D.activeSampler(9);
-        gBuffer.depthAttachment.bind();
         //depthTexture.bind();
 
 
@@ -1621,6 +1658,11 @@ public class World {
         glReadBuffer(GL30.GL_COLOR_ATTACHMENT3);
         GL30.glBlitFramebuffer(0, 0, Display.getWidth(), Display.getHeight(),
                 picWidth * 3, 0, picWidth * 4, picHeight, GL_COLOR_BUFFER_BIT, GL_LINEAR);
+
+        ssao.getSsaoBuffer().bindForReading();
+        glReadBuffer(GL30.GL_COLOR_ATTACHMENT0);
+        GL30.glBlitFramebuffer(0, 0, Display.getWidth(), Display.getHeight(),
+                picWidth * 5, 0, picWidth * 6, picHeight, GL_COLOR_BUFFER_BIT, GL_LINEAR);
     }
 
     private void renderForward() {
@@ -1661,7 +1703,7 @@ public class World {
         // 3. Enable blending.
         // 4. Render Directional/Spot/Point/Area lights **with object + light culling**. THIZ IZ SLOWWW
 
-        // Todo: Cull invsilible objects.
+        // Todo: Cull invrsilible objects.
         List<WorldObject> visibleObjects = new ArrayList<>(objects);
         // Sort front to back.
         visibleObjects.sort((o1, o2) -> {

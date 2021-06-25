@@ -40,7 +40,7 @@ public class DirectionalLight extends Light {
     private VSM vsm;
 
     public DirectionalLight() {
-        this.lightProjection = new Matrix4f().initOrtho(-1024, 1024, -1024, 1024, -768, 768);
+        this.lightProjection = new Matrix4f().initOrtho(-256, 256, -256, 256, -256, 256);
     }
 
     public void setDirection(Vector3f direction) {

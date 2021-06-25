@@ -1,0 +1,88 @@
+Názov projektu: lpsim
+Autor: Matej Kormuth
+Platforma: LWJGL/Windows
+Programovací jazyk: Java
+Vývojové prostredie: IntelliJ Idea
+Použité knižnice, spôsob ich použitia:
+ - standard java library -> many uses
+ - org.lwjgl.lwjgl -> opengl bindings
+ - com.dobrakmato.math -> vector math library
+ - com.google.code.findbugs -> non-null annotations
+ - slf4j/log4j/jcabi-log -> logging
+ - net.jpountz.lz4 -> compression library
+ - com.eclipsesource.minimal-json -> json parsing
+ - org.projectlombok -> code generation
+ - commons-cli -> command line argument parsing
+ - trove4j -> primitive collections
+Podrobný opis scény, všetkých objektov v scéne ich rozmiestnenie, transformácie (modely, svetlá, kamera):
+ - na drevenej podlahe na ktorej rastu buriny je gauc, lampa a kochlik s bambusom
+ - za tymito objektami sa nachadza stena
+ - lampa je zdroj svetla (point light)
+ - z boku svieti directional light (slnko)
+ - vedla gauca sa nachadza ventilator, ktory sa toci
+ - cez ventilator svieti smerove svetlo (spot light), vrtule ventilatoru vrhaju na scenu tiene
+ - kamera sa nachadza pred vsetkymi objektami
+Ilustračný obrázok rozmiestnenia objektov:
+ - to be added
+Presný opis animovania objektov, transformácie v čase. Ilustračný obrázok trajektórií
+ - vo ventilatore sa tocia vrtule
+ - trava/buriny sa hybu vo vetre
+Presný zoznam a opis použitých shaderov, efektov. Na ktoré objekty v scéne sa budú aplikovať
+ - bloomCombine.vert -> passtrough shader pre bloom
+ - bloomCombine.frag -> kombinuje jednotlive bloom buffery (jednotlive rozblurovane textury) do jednej ktora sa nasledne alpha blenduje na kompozit
+ - bloomLight.vert -> passtrough shader pre bloom
+ - bloomLight.frag -> bikubicky sampluje hrd buffer a vybera podla thresholdu pixely, ktore budu prispievat do bloom efektu
+ - blur9x9.vert -> passtrough shader pre blur
+ - blur9x9.frag -> aplikuje 9x9 gausovsky kernel na rozmazanie bud v horizontalnom alebo vertikalnom smere
+ - defferedGeometry.vert -> vertex shader pre geometry pass
+ - defferedGeometry.frag -> fragment shader pre geometry pass, sampluje mapy, pocita parallax occlusion mapping a normal mapping
+ - defferedDirectional.vert -> passtrough, pocita inversy matic
+ - defferedDirectional.frag -> pocita shadeovanie pre directional light + aplikuje shadow mapu
+ - deffered{Point/Spot}Light -> pocita shadeovanie pre ostatne typy svetiel
+ - defferedSkybox.frag -> pocita shadeovanie pre osvetlenie environment mapou (skyboxom)
+ - fxaa.vert -> passtrough
+ - fxaa.frag -> aplikuje FXAA anti-alising efekt, ktory rozmaze ostre hrany
+ - gaussianBlur.vert -> passtrough shader
+ - gaussianBlur.frag -> aplikuje 7x7 gausovsky kernel na rozmazanie textury bud horizontalne alebo vertikalne
+ - PreethamSky.vert -> passtrough shader pre skybox
+ - PreethamSky.frag -> pocita preethamov scattering model oblohy (https://www2.cs.duke.edu/courses/cps124/spring08/assign/07_papers/p91-preetham.pdf)
+ - quad.vert -> passtrough shader
+ - quad.frag -> texturuje podla uniform dat (akoby operacia Blit medzi buffermi)
+ - shadowMap.vert -> pocita transformaciu vertexov pre potreby tienov
+ - shadowMap.frag -> nerobi nic lebo tiene produkuju iba depth buffer
+ - tonemap.vert -> passtrough shader
+ - tonemap.frag -> aplikuje HELJ tonemapping operator na HDR buffer
+ - vsm.vert -> pocita transformaciu vertexov pre potreby tienov
+ - vsm.frag -> pocita momenty pre potrebu variance shadow mappingu
+Ovládanie aplikácie. Spôsob ovládania animácií a vykresľovania jednotlivých efektov
+ - kamera sa da otacat pohybom mysi
+ - kamera sa da posuvat pomocou tlacidiel WASD, Space, Control
+ - kamera sa da zrychlit drzanim Shift
+ - po stlaceni F sa pripoji jeden zdroj svetla na kameru a po znovustlaceni sa odpoji (takto sa da premiestnit tento jeden zdroj)
+ - vsetky efekty sa automaticky zapnu a pouzivaju
+
+Project is demo program that uses OpenGL and GLSL for visualization of scene
+
+Necessary conditions:
+- [x] Loading of 4 objects from external file.
+- [x] At least 1 moving/animated object.
+- [x] Moving camera.
+- [x] All objects should be textured and rendered using shaders
+- [x] At least 3 light sources (point + directional)
+- [x] At least 3 different shader programs (vertex+fragment shader)
+- [x] Rendering to texture or shadows
+
+Pick 1 additional packages of effects:
+- [ ] Using geometry shader for generating subdivision surfaces
+- [ ] Displacement mapping, Terrain rendering with LOD
+- [ ] Depth of field, Motion blur
+- [ ] Screen space ambient occlusion
+- [x] HDR rendering
+- [ ] Lens flare
+- [x] Bloom effects
+- [x] Parallax, bump, relief mapping
+- [ ] Reflection and refraction on water surface
+- [ ] Particle system for waterfall or fire visualization
+- [ ] Volume rendering of clouds, volumetric effects (smoke, fog, light volumes)
+- [ ] Toon, cell shading, Oren-Nayar per-pixel lighting
+- [x] Cook-Torrance per-pixel lighting

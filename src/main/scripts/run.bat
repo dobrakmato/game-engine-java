@@ -25,11 +25,4 @@
 @REM SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 @REM
 
-if exist "C:\Users\Matej\Downloads\runtime\jre-x64\1.8.0_25\bin\java.exe" (
-    @REM matov pc s vela javami
-    "C:\Users\Matej\Downloads\runtime\jre-x64\1.8.0_25\bin\java.exe" -jar -Dlights=0 -Djava.library.path="${release.natives}" "${finalName}"
-) else (
-    @REM normalny pc
-    java.exe -jar -Dlights=0 -Djava.library.path="${release.natives}" "${finalName}"
-)
-
+"D:\Program Files\Java\jdk1.8.0_112\bin\java.exe" -jar -Dlights=0 -Djava.library.path="natives/" "lpsim-1.0.jar"

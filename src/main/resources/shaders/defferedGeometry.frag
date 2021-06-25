@@ -6,7 +6,7 @@
 
 // Input
 in vec2 texCoord0;
-//in vec3 normal0;
+in vec3 normal0;
 in vec3 tangent0;
 in vec4 worldPos0;
 
@@ -163,7 +163,7 @@ void main() {
     if (G_ANISOTROPIC) {
         normal = tangent0;
     } else {
-        normal = normalmap_normal(TBN0, map_normal, texCoord).xyz; // normal mapping
+        normal = normal0; // normalmap_normal(TBN0, map_normal, texCoord).xyz; // normal mapping
     }
 
     #ifdef UseToksvig_

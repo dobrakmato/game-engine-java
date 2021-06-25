@@ -111,7 +111,10 @@ public class PreethamSky extends Sky {
     }
 
     private Vector3f spherical(float theta, float phi) {
-        return new Vector3d(cos(phi) * sin(theta), sin(phi) * sin(theta), cos(theta)).asVetor3f();
+        return new Vector3f(
+                (float) (cos(phi) * sin(theta)),
+                (float) (sin(phi) * sin(theta)),
+                (float) cos(theta));
     }
 
     float time;

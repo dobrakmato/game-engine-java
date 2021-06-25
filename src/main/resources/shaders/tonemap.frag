@@ -28,7 +28,7 @@ void main() {
     //    hdr = vec3(1,0,0);
     //}
 
-    vec3 color = tonemap_hejl(hdr * exposure, 10);
+    vec3 color = tonemap_hejl(hdr * exposure, 50);
     //vec3 color = ACESFilm(hdr*0.6);
     gl_FragColor = vec4(color, 1);
 }

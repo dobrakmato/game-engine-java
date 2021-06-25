@@ -30,9 +30,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>eu.matejkormuth</groupId>
+            <groupId>com.github.dobrakmato</groupId>
             <artifactId>math</artifactId>
-            <version>1.1</version>
+            <version>-a63f4f7f0e-1</version>
         </dependency>
 
         <!-- OpenGL / LWJGL -->
@@ -87,7 +87,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.6</version>
+            <version>1.18.16</version>
             <scope>provided</scope>
         </dependency>
 
@@ -104,6 +104,23 @@
             <version>3.0.3</version>
         </dependency>
 
+        <!-- XML for new Java -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+
         <!-- Test -->
         <dependency>
             <groupId>junit</groupId>
@@ -115,8 +132,8 @@
 
     <repositories>
         <repository>
-            <id>matejkormuth-repo</id>
-            <url>http://repo.matejkormuth.eu</url>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
     </repositories>
 
@@ -136,7 +153,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.2</version>
+                <version>3.6.2</version>
                 <configuration combine.self="override">
                     <source>1.8</source>
                     <target>1.8</target>
